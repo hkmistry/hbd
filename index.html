@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Happy Birthday Dhvani! 👑 | My Queen & Mari Vhali</title>
+
+    <!-- Meta Tags for Mobile Sharing & SEO -->
+    <meta name="description"
+        content="A special, interactive birthday website crafted with love for Dhvani (My Queen / Mari Vhali).">
+    <meta name="theme-color" content="#0f0723">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Dynamic Fullscreen Party Backdrop (Fixed across all sections) -->
+    <div class="party-backdrop" id="partyBackdrop"></div>
+
+    <!-- Canvas for Floating Sparkles & Hearts Background -->
+    <canvas id="sparkleCanvas"></canvas>
+
+    <!-- Floating Controls: Minimal Circular FAB Buttons -->
+    <div class="audio-control-widget" id="audioWidget">
+
+        <!-- Music FAB Button -->
+        <div class="fab-wrap" data-tooltip="Play Music">
+            <button class="fab-btn fab-music" id="musicToggleBtn" aria-label="Play Background Music">
+                <div class="vinyl-disc" id="vinylDisc">
+                    <i class="fa-solid fa-music" id="musicIcon"></i>
+                </div>
+            </button>
+        </div>
+
+        <!-- Party Mode FAB Button -->
+        <div class="fab-wrap" data-tooltip="Party Mode">
+            <button class="fab-btn fab-party" id="partyToggleBtn" aria-label="Toggle Party Mode"
+                onclick="togglePartyMode()">
+                <span class="fab-party-icon" id="partyIcon">🥳</span>
+            </button>
+        </div>
+
+        <!-- Hidden Audio Elements -->
+        <audio id="bgMusic" loop preload="auto">
+            <source src="assets/HBD.mpeg" type="audio/mpeg">
+        </audio>
+        <audio id="partyMusic" loop preload="auto">
+            <source src="assets/Party.mpeg" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- Main Mobile Container -->
+    <div class="app-container">
+
+        <!-- HERO SECTION: Welcome My Queen -->
+        <header class="hero-section" id="hero">
+            <div class="glass-card hero-card">
+                <div class="crown-badge floating-anim">
+                    <span class="crown-icon">👑</span>
+                    <span class="badge-text">Dedicated to My Queen</span>
+                </div>
+
+                <h1 class="hero-title">
+                    Happy Birthday,<br>
+                    <span class="highlight-name shimmer-text">Mari Vhali Dhanu! ✨</span>
+                </h1>
+
+                <!-- Dynamic Nickname Tag Pill Cloud -->
+                <div class="nickname-pills">
+                    <span class="pill pill-primary"><i class="fa-solid fa-crown"></i> My Queen</span>
+                    <span class="pill pill-rose"><i class="fa-solid fa-heart"></i> Mari Vhali</span>
+                    <span class="pill pill-purple"><i class="fa-solid fa-sparkles"></i> Dhanu</span>
+                    <span class="pill pill-gold"><i class="fa-solid fa-gem"></i> Madam Jii</span>
+                    <span class="pill pill-pink"><i class="fa-solid fa-star"></i> Babe</span>
+                </div>
+
+                <p class="hero-subtext">
+                    To the most amazing girl bestie in the universe! Welcome to your very own magical birthday
+                    wonderland crafted with all our sweet memories. 💕
+                </p>
+
+                <!-- Bubu Dudu Cute Character Container (Natural Display) -->
+                <div class="cute-character-box">
+                    <div class="gif-frame">
+                        <img src="assets/Happy_Birthday_2.gif" alt="Happy Birthday Animation" id="heroGif"
+                            class="bubu-gif" onerror="this.src='assets/Happy_Birthday_2.gif'">
+                    </div>
+                    <span class="character-caption">"Happy Birthday to My Queen, Dhanu!" 🎉👑</span>
+                </div>
+
+                <!-- Live Countdown Timer to 22nd September -->
+                <div class="countdown-container">
+                    <h3 class="countdown-title"><i class="fa-solid fa-clock"></i> Birthday Countdown (22nd Sept)</h3>
+                    <div class="countdown-grid" id="countdownGrid">
+                        <div class="time-block">
+                            <span class="time-val" id="cdDays">00</span>
+                            <span class="time-lbl">Days</span>
+                        </div>
+                        <span class="colon">:</span>
+                        <div class="time-block">
+                            <span class="time-val" id="cdHours">00</span>
+                            <span class="time-lbl">Hours</span>
+                        </div>
+                        <span class="colon">:</span>
+                        <div class="time-block">
+                            <span class="time-val" id="cdMins">00</span>
+                            <span class="time-lbl">Mins</span>
+                        </div>
+                        <span class="colon">:</span>
+                        <div class="time-block">
+                            <span class="time-val" id="cdSecs">00</span>
+                            <span class="time-lbl">Secs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Button -->
+                <button class="cta-btn pulse-glow" id="startBtn" onclick="scrollToSection('timelineSection')">
+                    Unwrap The Surprise <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- CHAPTER 1: THE STORY OF US (OUR TIMELINE) -->
+        <section class="section timeline-section" id="timelineSection">
+            <div class="section-header">
+                <span class="section-subtitle">Our Special Journey</span>
+                <h2 class="section-title">The Story of Us 📖✨</h2>
+                <p class="section-desc">From our very first compliments to unforgettable college moments!</p>
+            </div>
+
+            <div class="timeline">
+                <!-- Memory 1: Rangoli & Dance -->
+                <div class="timeline-item left-item">
+                    <div class="timeline-badge"><i class="fa-solid fa-palette"></i></div>
+                    <div class="glass-card timeline-card">
+                        <span class="timeline-date">Where It All Began 🌸</span>
+                        <h3>The First Compliments</h3>
+                        <p>Remember how our friendship sparked? You gave me the sweetest compliment for my
+                            <strong>Rangoli</strong>, and I was completely amazed by your breathtaking
+                            <strong>Dance</strong>! That moment laid the foundation of our bond.
+                        </p>
+                        <div class="card-tag"><i class="fa-solid fa-hand-holding-heart"></i> Instant Besties Connection
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Memory 2: 4 Dance Performances -->
+                <div class="timeline-item right-item">
+                    <div class="timeline-badge"><i class="fa-solid fa-music"></i></div>
+                    <div class="glass-card timeline-card">
+                        <span class="timeline-date">College Magic 💃🕺</span>
+                        <h3>Unforgettable Dance Performances</h3>
+                        <p>We set the college stage on fire not once, but <strong>4 times together!</strong> Those
+                            endless practice hours, synchronized steps, backstage nervous laughter, and final applause
+                            are memories I will treasure forever!</p>
+                        <div class="card-tag"><i class="fa-solid fa-trophy"></i> Stage Icons</div>
+                    </div>
+                </div>
+
+                <!-- Memory 3: Crafting Together -->
+                <div class="timeline-item left-item">
+                    <div class="timeline-badge"><i class="fa-solid fa-scissors"></i></div>
+                    <div class="glass-card timeline-card">
+                        <span class="timeline-date">Creative Souls ✂️🎨</span>
+                        <h3>Crafting Side by Side</h3>
+                        <p>You love crafting, and doing creative projects with you made every single hour feel magical.
+                            From colors and scissors to glue and endless laughter, we created art and memories
+                            side-by-side!</p>
+                        <div class="card-tag"><i class="fa-solid fa-wand-sparkles"></i> Handmade Happiness</div>
+                    </div>
+                </div>
+
+                <!-- Memory 4: Dhanu My Queen -->
+                <div class="timeline-item right-item">
+                    <div class="timeline-badge"><i class="fa-solid fa-crown"></i></div>
+                    <div class="glass-card timeline-card">
+                        <span class="timeline-date">Today & Forever 💖</span>
+                        <h3>Mari Vhali Dhanu - My Queen</h3>
+                        <p>Through every joke, crazy story, late-night chat, and celebration, you've been the absolute
+                            best friend anyone could ever ask for. Happy Birthday Madam Jii!</p>
+                        <div class="card-tag"><i class="fa-solid fa-infinity"></i> Besties Forever</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPTER 2: INTERACTIVE BIRTHDAY CAKE -->
+        <section class="section cake-section" id="cakeSection">
+            <div class="glass-card cake-card">
+                <span class="section-subtitle">Make a Birthday Wish 🎂</span>
+                <h2 class="section-title">Blow out the Candles, Dhanu! 🕯️✨</h2>
+                <p class="section-desc">Tap or click on the candle flames to blow them out and unlock your birthday
+                    surprise!</p>
+
+                <!-- 3D Interactive Cake Widget -->
+                <div class="cake-wrapper">
+                    <div class="cake" id="birthdayCake">
+                        <!-- Candle 1 -->
+                        <div class="candle candle-1" data-lit="true">
+                            <div class="flame" onclick="extinguishCandle(this)"></div>
+                            <div class="wick"></div>
+                        </div>
+                        <!-- Candle 2 -->
+                        <div class="candle candle-2" data-lit="true">
+                            <div class="flame" onclick="extinguishCandle(this)"></div>
+                            <div class="wick"></div>
+                        </div>
+                        <!-- Candle 3 -->
+                        <div class="candle candle-3" data-lit="true">
+                            <div class="flame" onclick="extinguishCandle(this)"></div>
+                            <div class="wick"></div>
+                        </div>
+
+                        <!-- Top Tier -->
+                        <div class="tier tier-top">
+                            <div class="frosting"></div>
+                            <div class="strawberry">🍓</div>
+                            <div class="strawberry">🍓</div>
+                        </div>
+
+                        <!-- Middle Tier -->
+                        <div class="tier tier-middle">
+                            <div class="frosting"></div>
+                            <div class="sprinkles">
+                                <span class="dot dot-1"></span>
+                                <span class="dot dot-2"></span>
+                                <span class="dot dot-3"></span>
+                                <span class="dot dot-4"></span>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Tier -->
+                        <div class="tier tier-bottom">
+                            <div class="frosting"></div>
+                        </div>
+
+                        <!-- Plate -->
+                        <div class="cake-plate"></div>
+                    </div>
+                </div>
+
+                <div class="cake-actions">
+                    <button class="action-btn" id="blowCandlesBtn" onclick="extinguishAllCandles()">
+                        <i class="fa-solid fa-wind"></i> Tap to Blow All Candles!
+                    </button>
+                </div>
+
+                <!-- Unlocked Wish Banner (Hidden until candles blown) -->
+                <div class="wish-unlocked-card hidden" id="wishUnlockedCard">
+                    <div class="celebration-gif-wrapper">
+                        <img src="assets/Happy_Birthday_2.gif" alt="Happy Birthday Celebration"
+                            class="wish-celebration-gif">
+                    </div>
+                    <h3>Wish Granted for My Queen!</h3>
+                    <p>May your life brings more and more happiness and you got everything you wished for and which is
+                        best for you , may god bless you and give you full of hopes and strength to handle every
+                        situations of your life , i will also be there for you always no matter what , just be happy
+                        always my girl , you happy -> me happy , Mari Vhali Dhanu ! 💖</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPTER 3: POLAROID SCRAPBOOK GALLERY (3D Flip Cards - Concept 4) -->
+        <section class="section gallery-section" id="gallerySection">
+            <div class="section-header">
+                <span class="section-subtitle">Snapshot of Memories</span>
+                <h2 class="section-title">3D Flip Polaroid Scrapbook 📸🔄</h2>
+                <p class="section-desc">Tap any photo to flip it over and read the secret note on the back!</p>
+            </div>
+
+            <div class="polaroid-grid">
+                <!-- Polaroid 1: Mehndi Moment -->
+                <div class="polaroid-card tilt-left" onclick="flipPolaroidCard(this)">
+                    <div class="polaroid-inner">
+                        <!-- Front -->
+                        <div class="polaroid-front">
+                            <div class="tape"></div>
+                            <div class="polaroid-img-wrapper">
+                                <img src="assets/Mehndi.jpeg" alt="Drawing Mehndi" class="polaroid-img"
+                                    onerror="this.src='https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80'">
+                            </div>
+                            <div class="polaroid-caption">
+                                <span>Drawing Her Mehndi 🌿</span>
+                                <span class="flip-hint"><i class="fa-solid fa-rotate"></i> Flip</span>
+                            </div>
+                        </div>
+                        <!-- Back Side Secret Note -->
+                        <div class="polaroid-back">
+                            <div class="tape"></div>
+                            <div class="back-note-content">
+                                <span class="back-note-tag">Memory Note 💌</span>
+                                <p class="back-note-text">"Remember that day when you got permission from your mom to
+                                    let me draw mehndi on your palm ?
+                                    You were so excited! That hours spent making the design is one of my favorite
+                                    peaceful memories with you, Dear !"</p>
+                                <button class="zoom-btn"
+                                    onclick="event.stopPropagation(); openLightbox('assets/Mehndi.jpeg', 'Drawing Mehndi on Her Hand 🌿✨')">
+                                    <i class="fa-solid fa-expand"></i> Zoom Photo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Polaroid 2: Best Dance Partner -->
+                <div class="polaroid-card tilt-right" onclick="flipPolaroidCard(this)">
+                    <div class="polaroid-inner">
+                        <!-- Front -->
+                        <div class="polaroid-front">
+                            <div class="tape"></div>
+                            <div class="polaroid-img-wrapper">
+                                <img src="assets/Dancing.jpeg" alt="Best Dance Partner" class="polaroid-img"
+                                    onerror="this.src='https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=600&q=80'">
+                            </div>
+                            <div class="polaroid-caption">
+                                <span>Best Dance Partner 💃</span>
+                                <span class="flip-hint"><i class="fa-solid fa-rotate"></i> Flip</span>
+                            </div>
+                        </div>
+                        <!-- Back Side Secret Note -->
+                        <div class="polaroid-back">
+                            <div class="tape"></div>
+                            <div class="back-note-content">
+                                <span class="back-note-tag">Stage Star 💃✨</span>
+                                <p class="back-note-text">"Remember our college dance performance? Backstage nervous
+                                    laughter, heart racing, and then you rocked the stage! You are truly the best dance
+                                    partner anyone could ever ask for!"</p>
+                                <button class="zoom-btn"
+                                    onclick="event.stopPropagation(); openLightbox('assets/Dancing.jpeg', 'Best Dance Partner 💃✨')">
+                                    <i class="fa-solid fa-expand"></i> Zoom Photo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Polaroid 3: Secret Lecture Sketch -->
+                <div class="polaroid-card tilt-left" onclick="flipPolaroidCard(this)">
+                    <div class="polaroid-inner">
+                        <!-- Front -->
+                        <div class="polaroid-front">
+                            <div class="tape"></div>
+                            <div class="polaroid-img-wrapper">
+                                <img src="assets/Sketching.jpeg" alt="Lecture Sketch" class="polaroid-img"
+                                    onerror="this.src='https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80'">
+                            </div>
+                            <div class="polaroid-caption">
+                                <span>Lecture Sketch 📝</span>
+                                <span class="flip-hint"><i class="fa-solid fa-rotate"></i> Flip</span>
+                            </div>
+                        </div>
+                        <!-- Back Side Secret Note -->
+                        <div class="polaroid-back">
+                            <div class="tape"></div>
+                            <div class="back-note-content">
+                                <span class="back-note-tag">Classroom Secret ✏️</span>
+                                <p class="back-note-text">"Sitting next to you in Alpha while secretly sketching your
+                                    side profile (with your hair tied back in that cute clip)! You noticed it later and
+                                    smiled!"</p>
+                                <button class="zoom-btn"
+                                    onclick="event.stopPropagation(); openLightbox('assets/Sketching.jpeg', 'Secret Lecture Sketch 📝')">
+                                    <i class="fa-solid fa-expand"></i> Zoom Photo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Polaroid 4: Rangoli Duo -->
+                <div class="polaroid-card tilt-right" onclick="flipPolaroidCard(this)">
+                    <div class="polaroid-inner">
+                        <!-- Front -->
+                        <div class="polaroid-front">
+                            <div class="tape"></div>
+                            <div class="polaroid-img-wrapper">
+                                <img src="assets/Rangoli.jpeg" alt="Rangoli Duo" class="polaroid-img"
+                                    onerror="this.src='https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80'">
+                            </div>
+                            <div class="polaroid-caption">
+                                <span>Rangoli Duo 🎨🌸</span>
+                                <span class="flip-hint"><i class="fa-solid fa-rotate"></i> Flip</span>
+                            </div>
+                        </div>
+                        <!-- Back Side Secret Note -->
+                        <div class="polaroid-back">
+                            <div class="tape"></div>
+                            <div class="back-note-content">
+                                <span class="back-note-tag">Where It Began 🌸</span>
+                                <p class="back-note-text">"I can't forgot the day when you stayed with me till night to
+                                    complete the beautifull rangoli in college campus , when no one was around and you
+                                    stayed just for me , we spend a great time together making beautifull rangoli !
+                                    !"</p>
+                                <button class="zoom-btn"
+                                    onclick="event.stopPropagation(); openLightbox('assets/Rangoli.jpeg', 'Rangoli Duo 🎨🌸')">
+                                    <i class="fa-solid fa-expand"></i> Zoom Photo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Polaroid 5: Scooty Ride & Hug -->
+                <div class="polaroid-card tilt-left" onclick="flipPolaroidCard(this)">
+                    <div class="polaroid-inner">
+                        <!-- Front -->
+                        <div class="polaroid-front">
+                            <div class="tape"></div>
+                            <div class="polaroid-img-wrapper">
+                                <img src="assets/Scooty_Ride.jpeg" alt="Scooty Ride & Hug" class="polaroid-img"
+                                    onerror="this.src='https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80'">
+                            </div>
+                            <div class="polaroid-caption">
+                                <span>Scooty Ride & Hug 🛵</span>
+                                <span class="flip-hint"><i class="fa-solid fa-rotate"></i> Flip</span>
+                            </div>
+                        </div>
+                        <!-- Back Side Secret Note -->
+                        <div class="polaroid-back">
+                            <div class="tape"></div>
+                            <div class="back-note-content">
+                                <span class="back-note-tag">Bestie Rides 🛵</span>
+                                <p class="back-note-text">"Riding the scooty together across SG highway, wind in our
+                                    hair, your head on my shoulder , that confusion to grab waist or not , non-stop
+                                    talks and laughing like always! Pure happiness!"</p>
+                                <button class="zoom-btn"
+                                    onclick="event.stopPropagation(); openLightbox('assets/Scooty_Ride.jpeg', 'Scooty Ride & Besties Hug 🛵💨')">
+                                    <i class="fa-solid fa-expand"></i> Zoom Photo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Polaroid 6: Birthday Cake Celebration -->
+                <div class="polaroid-card tilt-right" onclick="flipPolaroidCard(this)">
+                    <div class="polaroid-inner">
+                        <!-- Front -->
+                        <div class="polaroid-front">
+                            <div class="tape"></div>
+                            <div class="polaroid-img-wrapper">
+                                <img src="assets/besties.jpeg" alt="Birthday Party" class="polaroid-img"
+                                    onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80'">
+                            </div>
+                            <div class="polaroid-caption">
+                                <span>Besties Forever 💕</span>
+                                <span class="flip-hint"><i class="fa-solid fa-rotate"></i> Flip</span>
+                            </div>
+                        </div>
+                        <!-- Back Side Secret Note -->
+                        <div class="polaroid-back">
+                            <div class="tape"></div>
+                            <div class="back-note-content">
+                                <span class="back-note-tag">BFF Forever ♾️</span>
+                                <p class="back-note-text">"You are the bestessss gift , tresure , blessings in my life
+                                    sent by god , No matter how many years pass, you will always be there in my heart
+                                    with that special place ! Happiest Birthday, Babe! ❤️"</p>
+                                <button class="zoom-btn"
+                                    onclick="event.stopPropagation(); openLightbox('assets/photo6.jpg', 'Best Friends Forever 🎂🎉')">
+                                    <i class="fa-solid fa-expand"></i> Zoom Photo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPTER 4: SEALED HEART BIRTHDAY ENVELOPE -->
+        <section class="section letter-section" id="letterSection">
+            <div class="section-header">
+                <span class="section-subtitle">From My Heart To Yours</span>
+                <h2 class="section-title">A Special Letter For You 💌</h2>
+                <p class="section-desc">Tap the wax seal to open your birthday letter, Mari Vhali!</p>
+            </div>
+
+            <div class="envelope-container" id="envelopeContainer">
+                <div class="envelope" id="envelope" onclick="toggleEnvelope()">
+                    <div class="envelope-flap"></div>
+                    <div class="wax-seal">
+                        <span class="seal-icon">👑</span>
+                        <span class="seal-text">Open</span>
+                    </div>
+                    <div class="envelope-pocket"></div>
+                </div>
+
+                <!-- Unfolded Birthday Letter Paper -->
+                <div class="letter-paper hidden" id="letterPaper">
+                    <button class="close-letter-btn" onclick="toggleEnvelope()"
+                        aria-label="Close Letter">&times;</button>
+                    <div class="letter-header">
+                        <span class="letter-date">22nd September 2026 🎈</span>
+                        <h3 class="letter-salutation">Dearest Mari Vhali Dhanu, 👑</h3>
+                    </div>
+
+                    <div class="letter-body handwritten-text">
+                        <p>Happy Happy Birthday to my absolute favourite person, my Queen, and the best girl bestie
+                            anyone could ever wish for! 💖</p>
+
+                        <p>Looking back at where we started—from that tiny spark when you complimented my Rangoli and I
+                            was totally mesmerized by your dance—I never imagined we would build such an incredibly
+                            beautiful friendship!</p>
+
+                        <p>Performing 4 dance routines together on college stage was pure magic, and all those hours we
+                            spent crafting side by side are memories that bring the biggest smile to my face every
+                            single time.</p>
+
+                        <p>Dhanu, you are truly one of a kind. You bring so much energy, warmth, brightness, and love
+                            everywhere you go. Never stop shining, Madam Jii! May this year bring you all the success,
+                            happiness, dance floors, and creative dreams you've ever wished for.</p>
+
+                        <p>Always stay your cute, amazing, joyful self!</p>
+                    </div>
+
+                    <div class="letter-footer">
+                        <div class="letter-gif-stamp">
+                            <img src="assets/kiss.gif" alt="Flying Kiss" class="letter-stamp-gif">
+                        </div>
+                        <span class="sign-off">With lots of love & hugs,</span>
+                        <span class="signature">Your Man 💖</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPTER 5: MINI SURPRISES (BALLOON POP & SCRATCH COUPONS) -->
+        <section class="section surprises-section" id="surprisesSection">
+            <div class="section-header">
+                <span class="section-subtitle">Fun Mini Games</span>
+                <h2 class="section-title">Pop & Scratch Surprises 🎁🎈</h2>
+                <p class="section-desc">Tap the balloons to pop them & scratch the cards below!</p>
+            </div>
+
+            <!-- POP THE BALLOONS MINI GAME -->
+            <div class="glass-card game-card">
+                <h3><i class="fa-solid fa-balloon"></i> Pop The Birthday Balloons!</h3>
+                <p class="game-hint">Tap each balloon to reveal a secret compliment for Dhanu!</p>
+
+                <div class="balloons-grid">
+                    <div class="balloon-item b-pink"
+                        onclick="popBalloon(this, 'My Favourite Dancer and also a my one and only dance partner! 💃')">
+                        <div class="balloon-string"></div>
+                        <span class="balloon-text">Pop Me!</span>
+                    </div>
+                    <div class="balloon-item b-purple"
+                        onclick="popBalloon(this, 'Ignore the whatever this world says , just trust me , you are the best creation of god , you are perfect ❤️, never doubt on my choice , specially not for this one 💘')">
+                        <div class="balloon-string"></div>
+                        <span class="balloon-text">Pop Me!</span>
+                    </div>
+                    <div class="balloon-item b-gold"
+                        onclick="popBalloon(this, 'Eyes like a Ocean , Lips like a Rose , Figure like a Model and Heart of pure Gold ✨')">
+                        <div class="balloon-string"></div>
+                        <span class="balloon-text">Pop Me!</span>
+                    </div>
+                    <div class="balloon-item b-blue"
+                        onclick="popBalloon(this, 'I just love whenver you bring somthing delicious for me and especially when its made by you 💖')">
+                        <div class="balloon-string"></div>
+                        <span class="balloon-text">Pop Me!</span>
+                    </div>
+                    <div class="balloon-item b-rose"
+                        onclick="popBalloon(this, 'Madam Jii with infinite charm! Sakhi ki ichha mere liye adesh hai 👑')">
+                        <div class="balloon-string"></div>
+                        <span class="balloon-text">Pop Me!</span>
+                    </div>
+                    <div class="balloon-item b-yellow"
+                        onclick="popBalloon(this, 'Always brings 100% happiness and so many beautiful colours into my black and white life 🌟')">
+                        <div class="balloon-string"></div>
+                        <span class="balloon-text">Pop Me!</span>
+                    </div>
+                </div>
+
+                <div class="balloon-pop-msg" id="balloonPopMsg">
+                    <span class="sparkle-star">✨</span> Select a balloon to reveal a sweet message! <span
+                        class="sparkle-star">✨</span>
+                </div>
+            </div>
+
+            <!-- SCRATCH CARD BESTIE COUPONS -->
+            <div class="glass-card game-card scratch-game-card">
+                <h3><i class="fa-solid fa-ticket"></i> Scratch-Off Bestie Coupons 🎟️</h3>
+                <p class="game-hint">Rub your finger or mouse over the glitter scratch area to redeem your coupon!</p>
+
+                <div class="scratch-grid">
+                    <!-- Coupon 1 -->
+                    <div class="scratch-box">
+                        <div class="coupon-content">
+                            <img src="assets/drink.gif" alt="Drink GIF" class="coupon-gif-icon">
+                            <h4>Coffee & Gossip Treat</h4>
+                            <p>Valid anytime for anything you want to eat which is made by me !</p>
+                            <span class="coupon-code">CODE: PARAM-SAKHI-01</span>
+                        </div>
+                        <canvas class="scratch-canvas" id="scratchCanvas1" width="280" height="160"></canvas>
+                    </div>
+
+                    <!-- Coupon 2 -->
+                    <div class="scratch-box">
+                        <div class="coupon-content">
+                            <img src="assets/Dancing.gif" alt="Dancing GIF" class="coupon-gif-icon">
+                            <h4>Dance Duet Command</h4>
+                            <p>You choose the song, I learn the dance steps without complaints!</p>
+                            <span class="coupon-code">CODE: MADAM-JII-02</span>
+                        </div>
+                        <canvas class="scratch-canvas" id="scratchCanvas2" width="280" height="160"></canvas>
+                    </div>
+
+                    <!-- Coupon 3 -->
+                    <div class="scratch-box">
+                        <div class="coupon-content">
+                            <img src="assets/hug.gif" alt="Hug GIF" class="coupon-gif-icon">
+                            <h4>Infinite Hugs & Support</h4>
+                            <p>Unlimited hugs, 24/7 support , Always there for u darling !</p>
+                            <span class="coupon-code">CODE: MARI-VHALI-03</span>
+                        </div>
+                        <canvas class="scratch-canvas" id="scratchCanvas3" width="280" height="160"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FRIENDSHIP LOVE METER -->
+            <div class="glass-card game-card meter-game-card">
+                <h3><i class="fa-solid fa-heart-pulse"></i> Bestie Friendship Meter ⚡</h3>
+                <p class="game-hint">Tap the button to test our friendship level!</p>
+
+                <div class="meter-bar-wrapper">
+                    <div class="meter-fill" id="meterFill"></div>
+                    <span class="meter-text" id="meterText">0%</span>
+                </div>
+
+                <button class="meter-btn" id="testMeterBtn" onclick="runFriendshipMeter()">
+                    Test Friendship Power! 💥
+                </button>
+                <div class="meter-result-msg" id="meterResult"></div>
+            </div>
+        </section>
+
+        <!-- CHAPTER 6: FIREWORKS FINALE & CELEBRATION WALL -->
+        <footer class="section finale-section" id="finaleSection">
+            <div class="glass-card finale-card">
+                <div class="celebration-firework-icon">
+                    <img src="assets/celebrate.gif" alt="Celebrate GIF" class="finale-celebrate-gif">
+                </div>
+                <h2 class="finale-title">Happy Birthday Dhanu! 🎉</h2>
+                <p class="finale-text">
+                    May your birthday be as unforgettable, beautiful, and cute as you are, <strong> Sweetheart
+                    </strong>!
+                    Keep shining like the Queen you are. 💖
+                </p>
+
+                <button class="cta-btn finale-btn pulse-glow" onclick="triggerFireworksFull()">
+                    Launch Birthday Fireworks! 🎇✨
+                </button>
+
+                <!-- Cute Bye Bouquet GIF -->
+                <div class="bye-gif-box">
+                    <img src="assets/giving_bucke.gif" alt="Giving Bouquet GIF" class="bubu-gif-small"
+                        onerror="this.src='assets/giving_rose.gif'">
+                </div>
+
+                <div class="credits">
+                    Handcrafted with endless love for <strong>Dhvani</strong> 👑 | September 22
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- LIGHTBOX MODAL FOR POLAROIDS -->
+    <div class="lightbox-modal hidden" id="lightboxModal" onclick="closeLightbox(event)">
+        <div class="lightbox-content">
+            <button class="close-lightbox" onclick="closeLightbox(event)">&times;</button>
+            <img src="" alt="Zoomed Polaroid Photo" id="lightboxImg">
+            <p id="lightboxCaption" class="lightbox-caption-text"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
